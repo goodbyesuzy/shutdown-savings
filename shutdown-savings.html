@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Government Shutdown "Savings" Counter</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; }
+        .rate { font-size: 24px; color: #007bff; }
+        .total { font-size: 48px; font-weight: bold; color: #28a745; }
+        .disclaimer { font-size: 16px; color: #6c757d; max-width: 600px; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>US Government Shutdown "Savings" Counter</h1>
+    <p class="rate">Estimated "savings" per minute: $13,127,854</p>
+    <p>Total "saved" since October 1, 2025:</p>
+    <div id="total" class="total">$0</div>
+    <div class="disclaimer">
+        Note: This is a simplified counter based on average federal spending rates and assumes all spending stops during a shutdown (which isn't true). Actual shutdowns cost the economy money due to disruptions and back pay. For entertainment/illustrative purposes only.
+    </div>
+
+    <script>
+        // Shutdown start: October 1, 2025, 12:01 a.m. EDT (converted to UTC: 2025-10-01T04:01:00Z)
+        const startTime = new Date('2025-10-01T04:01:00Z').getTime();
+        
+        // Spending rate per second (6.9 trillion / 365 days / 24 hours / 3600 seconds)
+        const ratePerSecond = 6900000000000 / (365 * 24 * 3600);  // ≈ 218,797.56
+        
+        function updateCounter() {
+            const now = new Date().getTime();
+            const elapsedSeconds = Math.floor((now - startTime) / 1000);
+            const totalSaved = Math.floor(elapsedSeconds * ratePerSecond);
+            document.getElementById('total').innerText = '$' + totalSaved.toLocaleString('en-US');
+        }
+
+        // Update every second
+        setInterval(updateCounter, 1000);
+        updateCounter();  // Initial update
+    </script>
+</body>
+</html>
